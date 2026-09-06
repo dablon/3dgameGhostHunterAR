@@ -1,0 +1,161 @@
+id: session-c80e40115b71418da61d1fa09dfcafca
+label: 3D game (Blender + Three.js)
+topic: |-
+  Juego de "Caza de fantasmas" con realidad aumentada:
+
+  Usa Three
+audience: null
+artifact:
+  kind: source-tree
+  mime: inode/directory
+  primary: README.md
+  extras:
+  - package.json
+  - tsconfig.json
+  - vite.config.ts
+  - index.html
+  - src/
+  - blender/export.py
+  - assets/source/
+  - public/assets/models/
+  - dist/
+  - RUNME.bat
+  - RUNME.sh
+research:
+  sources:
+  - type: web_search
+    queries:
+    - |-
+      Juego de "Caza de fantasmas" con realidad aumentada:
+
+      Usa Three ideas
+    - |-
+      Juego de "Caza de fantasmas" con realidad aumentada:
+
+      Usa Three pain points
+    - |-
+      Juego de "Caza de fantasmas" con realidad aumentada:
+
+      Usa Three trends 2026
+    subs: []
+    sites: []
+  - type: reddit
+    queries:
+    - |-
+      Juego de "Caza de fantasmas" con realidad aumentada:
+
+      Usa Three
+    subs:
+    - Entrepreneur
+    - smallbusiness
+    sites: []
+scoring:
+  formula: (demand * (10 - saturation)) / effort
+  dimensions:
+  - id: demand
+    range:
+    - 0.0
+    - 10.0
+    source: demand-validator
+  - id: saturation
+    range:
+    - 0.0
+    - 10.0
+    source: saturation-analyst
+  - id: effort
+    range:
+    - 1.0
+    - 10.0
+    source: cost-to-ship
+recipes:
+  discover:
+  - phase: trend
+    agent: signal-researcher
+    writes: _scratch/trend.md
+    after: []
+    gate: false
+  - phase: competition
+    agent: saturation-analyst
+    writes: _scratch/competition.md
+    after: []
+    gate: false
+  - phase: market
+    agent: demand-validator
+    writes: _scratch/market.md
+    after: []
+    gate: false
+  - phase: pain
+    agent: pain-analyzer
+    writes: _scratch/pain.md
+    after:
+    - trend
+    gate: false
+  - phase: cost
+    agent: cost-to-ship
+    writes: _scratch/cost.md
+    after:
+    - pain
+    - competition
+    gate: false
+  - phase: synth
+    agent: synthesizer
+    writes: IDEAS.md
+    after:
+    - pain
+    - cost
+    - market
+    gate: false
+  produce:
+  - phase: plan
+    agent: produce-orchestrator
+    writes: PLAN.md
+    after: []
+    gate: false
+  - phase: scaffold
+    agent: produce-orchestrator
+    writes: src/
+    after:
+    - plan
+    gate: true
+  - phase: blender-pipeline
+    agent: produce-orchestrator
+    writes: blender/export.py
+    after:
+    - scaffold
+    gate: false
+  - phase: build
+    agent: produce-orchestrator
+    writes: BUILD.log
+    after:
+    - scaffold
+    gate: false
+  - phase: validate
+    agent: produce-orchestrator
+    writes: VALIDATION.md
+    after:
+    - build
+    - blender-pipeline
+    gate: false
+  - phase: signoff
+    agent: ''
+    writes: SIGNOFF.md
+    after:
+    - validate
+    gate: true
+tools_bound:
+  render: claude-code
+tools_preferred:
+- claude-code
+- git
+- node
+verify:
+- exists: README.md
+- exists: src
+- exists: blender/export.py
+- cmd: npm run build
+compile_notes: |-
+  Cloned seeded recipe 'game-3d-blender-threejs' and specialized for topic 'Juego de "Caza de fantasmas" con realidad aumentada:
+
+  Usa Three'.
+  Compiled at 2026-09-06T00:07:25.512427834+00:00. brief="Juego de \"Caza de fantasmas\" con realidad aumentada:\n\nUsa Three.js + AR.js para detectar objetos en la cámara del usuario.\nEl jugador \"caza\" fantasmas (objetos virtuales) en su entorno real." count=1 hint=Some("game-3d-blender-threejs")
+recipe_source: game-3d-blender-threejs

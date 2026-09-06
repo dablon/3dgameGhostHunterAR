@@ -1,0 +1,5 @@
+VERIFY: PASS
+  [ok] exists:README.md — found /workspace/productions/15/run-8/README.md
+  [ok] exists:src — found /workspace/productions/15/run-8/src
+  [ok] exists:blender/export.py — found /workspace/productions/15/run-8/blender/export.py
+  [ok] cmd:npm run build — exit 0 — dist/assets/three-DlLSJcd4.js     479.13 kB │ gzip: 119.06 kB │ map: 1,952.29 kB | dist/assets/rapier-DpxwuBBO.js  2,056.54 kB │ gzip: 761.17 kB │ map: 2,207.75 kB | ✓ built in 2.00s
