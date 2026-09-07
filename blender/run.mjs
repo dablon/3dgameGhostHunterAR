@@ -12,7 +12,7 @@
 
 import { spawn } from 'node:child_process';
 import { mkdir, readdir, stat } from 'node:fs/promises';
-import { existsSync } from 'node:fs';
+import { existsSync, readdirSync } from 'node:fs';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -20,7 +20,28 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = resolve(__dirname, '..');
 const SOURCE_DIR = join(ROOT, 'assets', 'source');
 const OUTPUT_DIR = join(ROOT, 'public', 'assets', 'models');
-const BLENDER_BIN = process.env.BLENDER_BIN || 'blender';
+
+function resolveBlenderBin() {
+  if (process.env.BLENDER_BIN) return process.env.BLENDER_BIN;
+  const foundation = 'C:\\Program Files\\Blender Foundation';
+  if (existsSync(foundation)) {
+    try {
+      const versions = readdirSync(foundation)
+        .filter((d) => /^Blender \d/.test(d))
+        .sort()
+        .reverse();
+      for (const v of versions) {
+        const exe = join(foundation, v, 'blender.exe');
+        if (existsSync(exe)) return exe;
+      }
+    } catch {
+      // fall through to default
+    }
+  }
+  return 'blender';
+}
+
+const BLENDER_BIN = resolveBlenderBin();
 
 async function listBlendFiles() {
   if (!existsSync(SOURCE_DIR)) return [];

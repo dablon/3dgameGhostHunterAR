@@ -120,6 +120,8 @@
   </head>
   <body>
     <div id="app"></div>
+    <div class="vignette"></div>
+    <div class="crosshair"><span></span></div>
     <div class="hud" id="hud" hidden>
       <h1>👻 Ghost Hunter</h1>
       <ul>
@@ -153,6 +155,42 @@
         color: #fff;
         font-family: ui-monospace, monospace;
         font-weight: 600;
+      }
+      .vignette {
+        position: fixed;
+        inset: 0;
+        z-index: 4;
+        pointer-events: none;
+        background: radial-gradient(ellipse at center, transparent 52%, rgba(2, 4, 10, 0.55) 100%);
+      }
+      .crosshair {
+        position: fixed;
+        left: 50%;
+        top: 50%;
+        width: 26px;
+        height: 26px;
+        transform: translate(-50%, -50%);
+        z-index: 5;
+        pointer-events: none;
+        opacity: 0.85;
+      }
+      .crosshair span {
+        position: absolute;
+        inset: 8px;
+        border: 2px solid rgba(106, 212, 255, 0.9);
+        border-radius: 50%;
+      }
+      .crosshair::after {
+        content: '';
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        width: 4px;
+        height: 4px;
+        margin: -2px 0 0 -2px;
+        background: #9ffce0;
+        border-radius: 50%;
+        box-shadow: 0 0 6px #6ad4ff;
       }
     </style>
     <div class="loading" id="loading"><div class="spin"></div></div>

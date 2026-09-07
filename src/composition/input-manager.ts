@@ -74,8 +74,12 @@ export class InputManager {
   }
 
   tryRequestPointerLock(): void {
-    if (!this.state.pointerLocked) {
-      this.canvas.requestPointerLock();
+    if (this.state.pointerLocked) return;
+    try {
+      const result = this.canvas.requestPointerLock() as unknown;
+      if (result instanceof Promise) result.catch(() => {});
+    } catch {
+      // Chrome enforces a cooldown after user-initiated escape — retry on next click
     }
   }
 

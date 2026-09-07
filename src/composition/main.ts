@@ -58,6 +58,7 @@ async function main(): Promise<void> {
   // Build scene
   const scene = new GhostSceneManager(canvas);
   window.addEventListener('resize', () => scene.handleResize());
+  await scene.loadWorldAssets();
 
   // Build input
   const input = new InputManager(canvas);
@@ -138,6 +139,7 @@ async function main(): Promise<void> {
     scene.updateCameraFromInput(cam.flyCamera.yaw, cam.flyCamera.pitch, cam.transform.position);
 
     updateSceneFromWorld(world, scene, elapsed);
+    scene.updateEffects(elapsed);
     updateHUD(world, playerId);
   });
 
